@@ -1,0 +1,42 @@
+{
+  "name": "admin",
+  "version": "3.0.0",
+  "description": "",
+  "main": "./main/index.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^4.0.4",
+    "electron-builder": "^20.38.5"
+  },
+  "build": {
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "http://localhost:3001/"
+      }
+    ],
+    "directories": {
+      "output": "dist",
+      "app": "./"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "zip"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": true
+    }
+  },
+  "dependencies": {
+    "electron-updater": "^4.0.6"
+  }
+}
