@@ -24,7 +24,7 @@ function createWindow() {
   //   )
 
   //   // 加载应用----适用于 react/vue 项目
-  mainWindow.loadURL('http://ds.treyo.com/login?redirect=%2Findex')
+  mainWindow.loadURL('http://ds.treyo.com/login')
 
   // 打开开发者工具，默认不打开
   //   mainWindow.webContents.openDevTools()
