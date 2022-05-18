@@ -2,7 +2,7 @@
 
 const { app, BrowserWindow, Menu, Tray } = require('electron')
 const path = require('path')
-const url = require('url')
+// const url = require('url')
 // const autoUpdater = require('electron-updater').autoUpdater //引入 autoUpdater 更新模块
 // 保持window对象的全局引用,避免JavaScript对象被垃圾回收时,窗口被自动关闭.
 let mainWindow
@@ -42,7 +42,7 @@ function createWindow() {
     mainWindow.setSkipTaskbar(true)
   })
   // 新建托盘
-  let tray = new Tray(path.join(__dirname, '../app/favicon.ico'))
+  let tray = new Tray(path.join(__dirname, './favicon.ico'))
   // 托盘名称
   tray.setToolTip('Electron Tray')
   // 托盘菜单
