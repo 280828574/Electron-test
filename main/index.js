@@ -1,5 +1,6 @@
 // 引入electron并创建一个Browserwindow
-const { app, BrowserWindow } = require('electron')
+
+const { app, BrowserWindow, Menu, Tray } = require('electron')
 const path = require('path')
 const url = require('url')
 // const autoUpdater = require('electron-updater').autoUpdater //引入 autoUpdater 更新模块
@@ -13,24 +14,59 @@ function createWindow() {
   mainWindow.maximize()
   mainWindow.show()
 
-  // 加载应用-----  electron-quick-start中默认的加载入口
-  mainWindow.loadURL(
-    url.format({
-      pathname: path.join(__dirname, '../app/index.html'),
-      protocol: 'file:',
-      slashes: true,
-    })
-  )
+  // 加载应用-----  本地应用
+  //   mainWindow.loadURL(
+  //     url.format({
+  //       pathname: path.join(__dirname, '../app/index.html'),
+  //       protocol: 'file:',
+  //       slashes: true,
+  //     })
+  //   )
 
-  //   // 加载应用----适用于 react 项目
-  //   mainWindow.loadURL('http://localhost:3001/');
+  //   // 加载应用----适用于 react/vue 项目
+  mainWindow.loadURL('http://ds.treyo.com/login?redirect=%2Findex')
 
   // 打开开发者工具，默认不打开
   //   mainWindow.webContents.openDevTools()
 
   // 关闭window时触发下列事件.
-  mainWindow.on('closed', function () {
-    mainWindow = null
+  //   mainWindow.on('closed', function () {
+  //     mainWindow = null
+  //   })
+  // 触发关闭时触发
+  mainWindow.on('close', event => {
+    // 截获 close 默认行为
+    event.preventDefault()
+    // 点击关闭时触发close事件，我们按照之前的思路在关闭时，隐藏窗口，隐藏任务栏窗口
+    mainWindow.hide()
+    mainWindow.setSkipTaskbar(true)
+  })
+  // 新建托盘
+  let tray = new Tray(path.join(__dirname, '../app/favicon.ico'))
+  // 托盘名称
+  tray.setToolTip('Electron Tray')
+  // 托盘菜单
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: '显示',
+      click: () => {
+        mainWindow.show()
+      },
+    },
+    {
+      label: '退出',
+      click: () => {
+        mainWindow.destroy()
+      },
+    },
+  ])
+  // 载入托盘菜单
+  tray.setContextMenu(contextMenu)
+  // 双击触发
+  tray.on('double-click', () => {
+    // 双击通知区图标实现应用的显示或隐藏
+    mainWindow.isVisible() ? mainWindow.hide() : mainWindow.show()
+    mainWindow.isVisible() ? mainWindow.setSkipTaskbar(false) : mainWindow.setSkipTaskbar(true)
   })
   //更新
   //   autoUpdater.setFeedURL('http://localhost:3001/') //设置检测更新地址
