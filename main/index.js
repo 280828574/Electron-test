@@ -2,7 +2,7 @@
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
 const url = require('url')
-const autoUpdater = require('electron-updater').autoUpdater //引入 autoUpdater 更新模块
+// const autoUpdater = require('electron-updater').autoUpdater //引入 autoUpdater 更新模块
 // 保持window对象的全局引用,避免JavaScript对象被垃圾回收时,窗口被自动关闭.
 let mainWindow
 require('./menu.js')
@@ -33,12 +33,12 @@ function createWindow() {
     mainWindow = null
   })
   //更新
-  autoUpdater.setFeedURL('http://localhost:3001/') //设置检测更新地址
-  autoUpdater.checkForUpdates() //检测是否有新版本,如果有新版本则自动下载
-  autoUpdater.on('update-downloaded', function () {
-    //下载完成后执行 quitAndInstall
-    autoUpdater.quitAndInstall() //关闭软件并安装新版本
-  })
+  //   autoUpdater.setFeedURL('http://localhost:3001/') //设置检测更新地址
+  //   autoUpdater.checkForUpdates() //检测是否有新版本,如果有新版本则自动下载
+  //   autoUpdater.on('update-downloaded', function () {
+  //     //下载完成后执行 quitAndInstall
+  //     autoUpdater.quitAndInstall() //关闭软件并安装新版本
+  //   })
 }
 
 // 当 Electron 完成初始化并准备创建浏览器窗口时调用此方法

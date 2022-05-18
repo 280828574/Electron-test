@@ -4,7 +4,7 @@
   "description": "",
   "main": "./main/index.js",
   "scripts": {
-    "start": "electron .",
+    "dev": "electron .",
     "dist": "electron-builder"
   },
   "author": "",
